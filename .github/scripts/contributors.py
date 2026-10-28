@@ -18,7 +18,9 @@ SIZE = 64
 
 START = "<!-- CONTRIBUTORS:START -->"
 END = "<!-- CONTRIBUTORS:END -->"
-AVATAR_DIR = "assets/avatars"
+AVATAR_DIR = ".github/avatars"
+LEGACY_FILES = ["assets/contributors.svg"]
+LEGACY_GLOBS = ["assets/avatars/*.svg"]
 
 
 def contributors():
@@ -76,8 +78,13 @@ def main():
     for path in glob.glob(f"{AVATAR_DIR}/*.svg"):
         if path not in keep:
             os.remove(path)
-    if os.path.exists("assets/contributors.svg"):
-        os.remove("assets/contributors.svg")
+    # clean up files from earlier versions that lived in assets/
+    for path in LEGACY_FILES:
+        if os.path.exists(path):
+            os.remove(path)
+    for pattern in LEGACY_GLOBS:
+        for path in glob.glob(pattern):
+            os.remove(path)
 
     link = f"https://github.com/{REPO}/graphs/contributors"
     cells = "\n".join(
