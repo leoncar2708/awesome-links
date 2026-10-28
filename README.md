@@ -451,13 +451,13 @@
 
 <!-- CONTRIBUTORS:START -->
 <p align="center">
-  <a href="https://github.com/nikomarinovic"><img src="assets/avatars/nikomarinovic.svg" width="64" height="64" alt="nikomarinovic" title="nikomarinovic" /></a>
-  <a href="https://github.com/SSShooter"><img src="assets/avatars/SSShooter.svg" width="64" height="64" alt="SSShooter" title="SSShooter" /></a>
-  <a href="https://github.com/pranshuchittora"><img src="assets/avatars/pranshuchittora.svg" width="64" height="64" alt="pranshuchittora" title="pranshuchittora" /></a>
-  <a href="https://github.com/ViggoZ"><img src="assets/avatars/ViggoZ.svg" width="64" height="64" alt="ViggoZ" title="ViggoZ" /></a>
-  <a href="https://github.com/andsnw"><img src="assets/avatars/andsnw.svg" width="64" height="64" alt="andsnw" title="andsnw" /></a>
-  <a href="https://github.com/poirot1226"><img src="assets/avatars/poirot1226.svg" width="64" height="64" alt="poirot1226" title="poirot1226" /></a>
-  <a href="https://github.com/tumingke0"><img src="assets/avatars/tumingke0.svg" width="64" height="64" alt="tumingke0" title="tumingke0" /></a>
+  <a href="https://github.com/nikomarinovic"><img src=".github/avatars/nikomarinovic.svg" width="64" height="64" alt="nikomarinovic" title="nikomarinovic" /></a>
+  <a href="https://github.com/SSShooter"><img src=".github/avatars/SSShooter.svg" width="64" height="64" alt="SSShooter" title="SSShooter" /></a>
+  <a href="https://github.com/pranshuchittora"><img src=".github/avatars/pranshuchittora.svg" width="64" height="64" alt="pranshuchittora" title="pranshuchittora" /></a>
+  <a href="https://github.com/ViggoZ"><img src=".github/avatars/ViggoZ.svg" width="64" height="64" alt="ViggoZ" title="ViggoZ" /></a>
+  <a href="https://github.com/andsnw"><img src=".github/avatars/andsnw.svg" width="64" height="64" alt="andsnw" title="andsnw" /></a>
+  <a href="https://github.com/poirot1226"><img src=".github/avatars/poirot1226.svg" width="64" height="64" alt="poirot1226" title="poirot1226" /></a>
+  <a href="https://github.com/tumingke0"><img src=".github/avatars/tumingke0.svg" width="64" height="64" alt="tumingke0" title="tumingke0" /></a>
 </p>
 <!-- CONTRIBUTORS:END -->
 
