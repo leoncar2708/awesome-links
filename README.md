@@ -15,7 +15,7 @@
 <br>
 <p align="center">
   <strong>Know something worth adding?</strong><br>
-  Help grow the collection by sharing a useful tool, resource, or repository.
+  Help grow the collection by sharing a useful tool, resource, or repository.<br>
   <sub>Pull requests can add up to 10 links each.</sub>
 </p>
 <p align="center">
