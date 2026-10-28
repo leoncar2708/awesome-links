@@ -360,6 +360,7 @@
 - [plasmicapp/plasmic](https://github.com/plasmicapp/plasmic) — visual builder for sites and apps.
 - [inovector/mixpost](https://github.com/inovector/mixpost) — self-hosted social media manager.
 - [duongductrong/Snapzy](https://github.com/duongductrong/Snapzy) — macOS screenshot and recording app.
+- [tumingke0/LayoutKeeper](https://github.com/tumingke0/LayoutKeeper) — macOS multi-monitor window layout manager with automatic Space restoration, per-port display arrangements, and DDC ambient brightness sync.
 - [0xsline/OpenChatCut](https://github.com/0xsline/OpenChatCut) — AI video editor with chat-based editing.
 - [coollabsio/shoutrrr](https://github.com/coollabsio/shoutrrr) — self-hosted social media scheduler.
 
