@@ -1,0 +1,77 @@
+name: Update contributors
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "0 6 * * 1"   # every Monday at 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate contributors block
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          MAX: "20"
+        run: |
+          python3 - <<'PY'
+          import os, re, subprocess
+
+          repo = os.environ["REPO"]
+          mx = int(os.environ["MAX"])
+
+          out = subprocess.run(
+              ["gh", "api", f"repos/{repo}/contributors?per_page=100", "--paginate",
+               "--jq", '.[] | select(.type=="User") | .login'],
+              check=True, capture_output=True, text=True,
+          ).stdout
+          logins = [l for l in out.split() if l]
+
+          shown = logins[:mx]
+          rest = len(logins) - len(shown)
+
+          cells = "\n".join(
+              f'  <a href="https://github.com/{l}"><img src="https://github.com/{l}.png?size=64" '
+              f'width="64" height="64" alt="{l}" title="{l}" /></a>'
+              for l in shown
+          )
+          block = f'<p align="center">\n{cells}\n</p>'
+          if rest > 0:
+              block += (
+                  f'\n\n<p align="center">\n'
+                  f'  <a href="https://github.com/{repo}/graphs/contributors">'
+                  f'<strong>+ {rest} more contributors</strong></a>\n</p>'
+              )
+
+          with open("README.md", encoding="utf-8") as f:
+              text = f.read()
+
+          pattern = r"(<!-- CONTRIBUTORS:START -->).*?(<!-- CONTRIBUTORS:END -->)"
+          if not re.search(pattern, text, flags=re.S):
+              raise SystemExit("Markers CONTRIBUTORS:START / END not found in README.md")
+
+          new = re.sub(pattern, lambda m: f"{m.group(1)}\n{block}\n{m.group(2)}", text, flags=re.S)
+
+          with open("README.md", "w", encoding="utf-8") as f:
+              f.write(new)
+          PY
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          if git diff --cached --quiet; then
+            echo "No changes."
+          else
+            git commit -m "chore: update contributors"
+            git push
+          fi

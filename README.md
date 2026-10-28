@@ -449,11 +449,8 @@
   Every useful link, correction, and improvement helps make the collection better.
 </p>
 
-<p align="center">
-  <a href="https://github.com/nikomarinovic/awesome-links/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=nikomarinovic/awesome-links&max=20&columns=10&v=2" alt="Contributors" />
-  </a>
-</p>
+<!-- CONTRIBUTORS:START -->
+<!-- CONTRIBUTORS:END -->
 
 <br>
 
