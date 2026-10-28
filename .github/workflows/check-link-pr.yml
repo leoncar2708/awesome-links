@@ -1,0 +1,61 @@
+name: Check link PR
+
+# pull_request_target runs the workflow from the default branch, so it works for
+# PRs from forks. The PR's code is never checked out or executed here: the script
+# only reads the diff through the API.
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: pr-check-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    # skip drafts and the owner's own PRs (the owner can merge those by hand)
+    if: >-
+      github.event.pull_request.user.login != github.repository_owner &&
+      !github.event.pull_request.draft
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout base branch (trusted code only)
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Validate pull request
+        id: validate
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: python3 .github/scripts/pr_check.py
+
+      - name: Post result as a comment
+        if: always() && hashFiles('report.md') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: gh pr comment "$PR_NUMBER" --repo "$REPO" --body-file report.md
+
+      - name: Merge pull request
+        if: steps.validate.outcome == 'success'
+        env:
+          # needs a token with "Pull requests: write" that is allowed to bypass the ruleset
+          GH_TOKEN: ${{ secrets.CONTRIBUTORS_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: gh pr merge "$PR_NUMBER" --repo "$REPO" --squash --match-head-commit "$HEAD_SHA"
+
+      - name: Mark check as failed
+        if: steps.validate.outcome == 'failure'
+        run: exit 1

@@ -16,6 +16,7 @@
 <p align="center">
   <strong>Know something worth adding?</strong><br>
   Help grow the collection by sharing a useful tool, resource, or repository.
+  <sub>Pull requests can add up to 10 links each.</sub>
 </p>
 <p align="center">
   <a href="https://github.com/nikomarinovic/awesome-links/issues/new?template=suggest-link.yml"><strong>Suggest a Link</strong></a>
